@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Bonds Watch Co.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2rem; }
+
+      :root {
+        --bg: #f7f4ee;
+        --bg-deep: #efe9dd;
+        --surface: #fffdf9;
+        --ink: #17150f;
+        --ink-soft: #55503f;
+        --gold: #a07d2c;
+        --gold-bright: #c9a227;
+        --line: #ddd3bd;
+        --frame: #ffffff;
+        --btn-disabled-bg: #e9e2d0;
+        --btn-disabled-ink: #8a8064;
+        --hero-bg: #100e0a;
+        --hero-ink: #f3ead3;
+        --hero-soft: #c9bfa4;
+        color-scheme: light;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d0c09;
+          --bg-deep: #12100c;
+          --surface: #171410;
+          --ink: #f0e9d8;
+          --ink-soft: #b3a888;
+          --gold: #c9a227;
+          --gold-bright: #e3c565;
+          --line: #37311f;
+          --frame: #1c1913;
+          --btn-disabled-bg: #26221a;
+          --btn-disabled-ink: #8f8468;
+          --hero-bg: #060504;
+          --hero-ink: #f3ead3;
+          --hero-soft: #c9bfa4;
+          color-scheme: dark;
+        }
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Jost", "Avenir Next", "Segoe UI", sans-serif;
+        font-weight: 300;
+        line-height: 1.55;
+      }
+      h1, h2, h3, .serif { font-family: "Playfair Display", Georgia, serif; }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        background: var(--hero-bg);
+        color: var(--hero-ink);
+        border-bottom: 3px solid var(--gold);
+      }
+      .hero-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 3.2rem 1.25rem 2.6rem;
+        display: grid;
+        gap: 2rem;
+        align-items: center;
+      }
+      @media (min-width: 820px) {
+        .hero-inner { grid-template-columns: 1.15fr 0.85fr; padding: 4rem 2rem 3.4rem; }
+      }
+      .wordmark {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: clamp(2.6rem, 7vw, 4.4rem);
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        line-height: 1.05;
+        margin: 0;
+        color: var(--hero-ink);
+      }
+      .wordmark .gold { color: var(--gold-bright); }
+      .hero-rule {
+        width: 72px; height: 2px;
+        background: var(--gold-bright);
+        margin: 1.1rem 0;
+      }
+      .hero-sub {
+        font-size: 1.05rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold-bright);
+        margin: 0 0 0.9rem;
+        font-weight: 500;
+      }
+      .hero p.lede {
+        margin: 0;
+        max-width: 34rem;
+        color: var(--hero-soft);
+        font-size: 1.08rem;
+      }
+      .hero-status {
+        margin-top: 1.6rem;
+        display: inline-block;
+        border: 1px solid var(--gold);
+        color: var(--hero-ink);
+        padding: 0.55rem 1rem;
+        font-size: 0.92rem;
+        letter-spacing: 0.06em;
+      }
+      .hero-status strong { color: var(--gold-bright); font-weight: 600; }
+      .hero-figure { margin: 0; }
+      .hero-figure img {
+        width: 100%;
+        display: block;
+        border: 1px solid var(--gold);
+      }
+      .hero-figure figcaption {
+        margin-top: 0.6rem;
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+        color: var(--hero-soft);
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      /* ---------- Spec strip ---------- */
+      .spec-strip {
+        background: var(--bg-deep);
+        border-bottom: 1px solid var(--line);
+      }
+      .spec-strip-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 1.1rem 1.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem 2.2rem;
+        justify-content: center;
+        text-align: center;
+      }
+      .spec-strip span {
+        font-size: 0.95rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        white-space: nowrap;
+      }
+      .spec-strip b { color: var(--gold); font-weight: 600; }
+
+      /* ---------- Collection ---------- */
+      main { max-width: 1180px; margin: 0 auto; padding: 2.6rem 1.25rem 1rem; }
+      @media (min-width: 820px) { main { padding-left: 2rem; padding-right: 2rem; } }
+      .collection { max-width: 1180px; margin: 0 auto; padding: 1.2rem 1.25rem 1rem; }
+      @media (min-width: 820px) { .collection { padding-left: 2rem; padding-right: 2rem; } }
+      .collection-head { text-align: center; margin-bottom: 2.2rem; }
+      .collection-head h2 {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        margin: 0 0 0.5rem;
+      }
+      .collection-head p { margin: 0; color: var(--ink-soft); font-size: 1.02rem; }
+      .collection-head p button {
+        background: none; border: none; padding: 0.35rem 0.15rem;
+        font: inherit; color: var(--gold); font-weight: 500;
+        text-decoration: underline; cursor: pointer; min-height: 2.25rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+      }
+      @media (min-width: 560px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (min-width: 960px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .card-fig {
+        margin: 0;
+        background: var(--frame);
+        position: relative;
+        cursor: zoom-in;
+        border: none;
+        padding: 0;
+        width: 100%;
+        display: block;
+      }
+      .card-fig img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        display: block;
+      }
+      .card-fig.contain { background: #0a0a0a; }
+      .card-fig.contain img { object-fit: contain; }
+      .tag {
+        position: absolute;
+        top: 0.7rem; left: 0.7rem;
+        background: #100e0a;
+        color: var(--gold-bright);
+        border: 1px solid var(--gold);
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.6rem;
+        pointer-events: none;
+      }
+      .zoom-hint {
+        position: absolute;
+        right: 0.7rem; bottom: 0.7rem;
+        background: rgba(10, 9, 6, 0.72);
+        color: #f3ead3;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        padding: 0.25rem 0.55rem;
+        pointer-events: none;
+      }
+      .card-body {
+        padding: 1.15rem 1.25rem 1.35rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+        flex: 1;
+      }
+      .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+      }
+      .card h3 {
+        margin: 0;
+        font-size: 1.35rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+      }
+      .price {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--gold);
+        white-space: nowrap;
+      }
+      .specs {
+        list-style: none;
+        margin: 0.2rem 0 0;
+        padding: 0.8rem 0 0;
+        border-top: 1px solid var(--line);
+        color: var(--ink-soft);
+        font-size: 0.96rem;
+        display: grid;
+        gap: 0.3rem;
+      }
+      .specs li { display: flex; justify-content: space-between; gap: 1rem; }
+      .specs li span:first-child { letter-spacing: 0.05em; }
+      .specs li span:last-child { color: var(--ink); font-weight: 400; text-align: right; }
+      .buy {
+        margin-top: auto;
+        padding-top: 1rem;
+      }
+      .buy a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 3rem;
+        font-family: "Jost", sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-decoration: none;
+        background: var(--gold);
+        color: #17150f;
+        border: 1px solid var(--gold);
+        cursor: pointer;
+      }
+      .buy a:hover, .buy a:focus-visible { background: var(--gold-bright); border-color: var(--gold-bright); }
+
+      /* ---------- Notes ---------- */
+      .notes {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 1rem 1.25rem 3rem;
+        display: grid;
+        gap: 1.6rem;
+      }
+      @media (min-width: 820px) {
+        .notes { grid-template-columns: 1fr 1fr; padding-left: 2rem; padding-right: 2rem; }
+      }
+      .note {
+        border-top: 2px solid var(--gold);
+        padding-top: 1rem;
+      }
+      .note h2 {
+        margin: 0 0 0.6rem;
+        font-size: 1.45rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+      .note p { margin: 0 0 0.7rem; color: var(--ink-soft); }
+      .note p:last-child { margin-bottom: 0; }
+      .note strong { color: var(--ink); font-weight: 500; }
+
+      footer {
+        border-top: 1px solid var(--line);
+        background: var(--bg-deep);
+      }
+      .footer-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 1.6rem 1.25rem 2rem;
+        text-align: center;
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+      }
+      .footer-inner .fmark {
+        font-family: "Playfair Display", Georgia, serif;
+        letter-spacing: 0.16em;
+        font-size: 1.05rem;
+        color: var(--ink);
+        margin-bottom: 0.35rem;
+      }
+      .footer-inner p { margin: 0.2rem 0; }
+
+      /* ---------- Lightbox ---------- */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(5, 4, 3, 0.94);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.25rem;
+        z-index: 50;
+      }
+      .lightbox.open { display: flex; }
+      .lightbox img {
+        max-width: min(92vw, 880px);
+        max-height: 76vh;
+        object-fit: contain;
+        border: 1px solid var(--gold);
+        background: #0a0a0a;
+      }
+      .lightbox .lb-name {
+        color: #f3ead3;
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 1.4rem;
+        letter-spacing: 0.05em;
+        text-align: center;
+      }
+      .lightbox .lb-name span { color: var(--gold-bright); font-family: "Jost", sans-serif; font-size: 1.05rem; margin-left: 0.6rem; }
+      .lb-close {
+        position: absolute;
+        top: 0.9rem; right: 0.9rem;
+        width: 3rem; height: 3rem;
+        border-radius: 50%;
+        border: 1px solid var(--gold);
+        background: transparent;
+        color: #f3ead3;
+        font-size: 1.4rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+
+    <header class="hero">
+      <div class="hero-inner">
+        <div>
+          <p class="hero-sub">Est. for the modern gentleman</p>
+          <h1 class="wordmark">BONDS<br /><span class="gold">WATCH CO.</span></h1>
+          <div class="hero-rule"></div>
+          <p class="lede">Twelve automatic watches. Pick the dial that suits you — ice blue, emerald, burgundy, or red lacquer. Plus the new Ladies' Collection — sixteen dials in two smaller sizes.</p>
+          <p class="hero-status">Each watch is <strong>custom made to order</strong> — please allow about 3 weeks for delivery.</p>
+        </div>
+        <figure class="hero-figure">
+          <img src="assets/asset-01.png" alt="Ice Blue Numerals Bonds watch — ice blue dial with full numeral markers" />
+          <figcaption>Ice Blue Numerals — the first sample</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="spec-strip" aria-label="Every watch in the collection">
+      <div class="spec-strip-inner">
+        <span><b>46mm</b> case</span>
+        <span><b>Automatic</b> movement</span>
+        <span><b>Custom</b> BONDS dial</span>
+        <span><b>3ATM</b> water resistance</span>
+        <span><b>Ships</b> in about 3 weeks</span>
+      </div>
+    </div>
+
+    <main>
+      <div class="collection-head">
+        <h2>The Collection</h2>
+        <p>All twelve dials, $99.95 each. Tap any watch to see the dial up close.</p>
+      </div>
+
+      <div class="grid" id="grid"></div>
+    </main>
+
+    <section class="collection" aria-label="Ladies' watches">
+      <div class="collection-head">
+        <h2>The Ladies' Collection</h2>
+        <p>Sixteen dials in two sizes — the 31mm and the 28mm — $69.95 each. Tap any watch to see the dial up close.</p>
+      </div>
+      <div class="grid" id="ladiesGrid"></div>
+    </section>
+
+    <section class="notes">
+      <div class="note">
+        <h2>From order to wrist</h2>
+        <p>No shelf stock and no warehouse rows — each Bonds watch is <strong>custom made to order</strong>, with its dial printed for that watch. Production runs about a week, then shipping takes another two, so please allow <strong>roughly three weeks</strong> from order to wrist.</p>
+        <p>Every men's model shares the same build: a <strong>46mm case</strong>, an <strong>automatic movement</strong> that winds itself as you wear it, a date window, and <strong>3ATM water resistance</strong> — fine for rain and hand-washing, not for swimming. The ladies' models come in <strong>31mm</strong> and <strong>28mm</strong> cases on black leather bands.</p>
+      </div>
+      <div class="note">
+        <h2>Ordering</h2>
+        <p>The men's collection is <strong>$99.95</strong> a watch; the Ladies' Collection is <strong>$69.95</strong>. Tap <strong>Buy</strong> on any watch to check out securely — your shipping address is collected at checkout so the watch goes straight to you.</p>
+        <p>Each watch is produced for its order, so allow <strong>roughly three weeks</strong> from checkout to wrist.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <p class="fmark">BONDS WATCH CO.</p>
+        <p>Custom-dial automatic watches.</p>
+      </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Watch dial close-up">
+      <button class="lb-close" id="lbClose" aria-label="Close close-up">&times;</button>
+      <img id="lbImg" alt="" />
+      <div class="lb-name" id="lbName"></div>
+    </div>
+
+    <script>
+      var SPECS = [
+        ["Movement", "Automatic"],
+        ["Case", "46mm"],
+        ["Dial", "Custom BONDS"],
+        ["Water resistance", "3ATM"],
+        ["Delivery", "~3 weeks"]
+      ];
+
+      var WATCHES = [
+        { name: "Ice Blue",           img: "assets/asset-02.png",           alt: "Ice Blue Bonds watch — brushed ice blue dial with baton markers and date window", buy: "https://buy.stripe.com/eVq00j3S3b5d8zZ0Gw7Zu3n" },
+        { name: "Crimson Red",        img: "assets/asset-03.png",       alt: "Crimson Red Bonds dial artwork — red lacquer dial with gold numeral markers", contain: true, buy: "https://buy.stripe.com/4gM28r0FR8X5aI7fBq7Zu3o" },
+        { name: "Minimal Black/Gold", img: "assets/asset-04.png", alt: "Minimal Black/Gold Bonds watch — black dial with gold BONDS lettering", buy: "https://buy.stripe.com/bJecN5agr8X5g2r74U7Zu3p" },
+        { name: "Ice Blue Numerals",  img: "assets/asset-01.png",  alt: "Ice Blue Numerals Bonds watch — ice blue dial with full numeral markers", tag: "First sample", buy: "https://buy.stripe.com/28E3cv4W72yH03tcpe7Zu3q" },
+        { name: "White/Navy",         img: "assets/asset-05.png",        alt: "White/Navy Bonds watch — white dial with navy BONDS lettering", buy: "https://buy.stripe.com/dRm9AT0FR2yH5nN4WM7Zu3r" },
+        { name: "Crest",              img: "assets/asset-06.png",             alt: "Crest Bonds watch — dial with the Bonds crest above the name", buy: "https://buy.stripe.com/fZu3cvbkv0qzeYn1KA7Zu3s" },
+        { name: "Bold",               img: "assets/asset-07.png",              alt: "Bold Bonds watch — bold BONDS lettering across the dial", buy: "https://buy.stripe.com/bJecN5bkvc9haI74WM7Zu3t" },
+        { name: "Emerald Green",      img: "assets/asset-08.png",     alt: "Emerald Green Bonds watch — deep green dial with gold lettering", buy: "https://buy.stripe.com/9B6dR9agr6OX17x1KA7Zu3u" },
+        { name: "Chronograph",        img: "assets/asset-09.png",       alt: "Chronograph Bonds watch — black dial with chronograph subdials", buy: "https://buy.stripe.com/eVqbJ14W7gpx3fF74U7Zu3v" },
+        { name: "Burgundy",           img: "assets/asset-10.png",          alt: "Burgundy Bonds watch — burgundy dial with gold lettering", buy: "https://buy.stripe.com/00wcN50FRa19eYn9d27Zu3w" },
+        { name: "Black Numerals",     img: "assets/asset-11.png",    alt: "Black Numerals Bonds watch — dial with full black numeral markers", buy: "https://buy.stripe.com/cNi9ATagr0qz8zZdti7Zu3x" },
+        { name: "Art Deco Numerals",  img: "assets/asset-12.png",     alt: "Art Deco Numerals Bonds watch — dial with Art Deco style numeral markers", buy: "https://buy.stripe.com/28EbJ1gEP8X57vVcpe7Zu3y" }
+      ];
+
+      function ladiesSpecs(size, movement, finish) {
+        return [
+          ["Movement", movement],
+          ["Case", size],
+          ["Case finish", finish],
+          ["Band", "Black leather"],
+          ["Delivery", "~3 weeks"]
+        ];
+      }
+
+      var LADIES = [
+        { name: "Ladies' Pearl 31mm",   img: "assets/asset-13.png",   alt: "Ladies' Pearl 31mm Bonds dial — pearl dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("31mm", "Seiko", "Gold-tone"),   buy: "https://buy.stripe.com/dRm9AT9cnddl5nN2OE7Zu3M" },
+        { name: "Ladies' Pink 31mm",    img: "assets/asset-14.png",    alt: "Ladies' Pink 31mm Bonds dial — pink dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("31mm", "Seiko", "Silver-tone"), buy: "https://buy.stripe.com/4gMfZhgEP5KTg2rcpe7Zu3N" },
+        { name: "Ladies' Yellow 31mm",  img: "assets/asset-15.png",  alt: "Ladies' Yellow 31mm Bonds dial — yellow dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("31mm", "Seiko", "Silver-tone"), buy: "https://buy.stripe.com/14A4gzfALa19dUjgFu7Zu3O" },
+        { name: "Ladies' White 31mm",   img: "assets/asset-16.png",   alt: "Ladies' White 31mm Bonds dial — white dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("31mm", "Seiko", "Gold-tone"),   buy: "https://buy.stripe.com/3cI6oH60bc9h7vV88Y7Zu3P" },
+        { name: "Ladies' Black 31mm",   img: "assets/asset-17.png",   alt: "Ladies' Black 31mm Bonds dial — black dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("31mm", "Seiko", "Gold-tone"),   buy: "https://buy.stripe.com/bJe00j9cngpxdUjexm7Zu3Q" },
+        { name: "Ladies' Red 31mm",     img: "assets/asset-18.png",     alt: "Ladies' Red 31mm Bonds dial — red dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("31mm", "Seiko", "Silver-tone"), buy: "https://buy.stripe.com/eVq5kD1JV3CL3fFdti7Zu3R" },
+        { name: "Ladies' Emerald 31mm", img: "assets/asset-19.png", alt: "Ladies' Emerald 31mm Bonds dial — emerald green dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("31mm", "Seiko", "Silver-tone"), buy: "https://buy.stripe.com/cNi9ATcozflt7vV2OE7Zu3S" },
+        { name: "Ladies' Blush 31mm",   img: "assets/asset-20.png",   alt: "Ladies' Blush 31mm Bonds dial — blush dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("31mm", "Seiko", "Silver-tone"), buy: "https://buy.stripe.com/eVq14nfALa19g2r2OE7Zu3T" },
+        { name: "Ladies' Pearl 28mm",   img: "assets/asset-13.png",   alt: "Ladies' Pearl 28mm Bonds dial — pearl dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("28mm", "Citizen", "Black"), buy: "https://buy.stripe.com/00w5kDewH8X5g2r0Gw7Zu3U" },
+        { name: "Ladies' Pink 28mm",    img: "assets/asset-14.png",    alt: "Ladies' Pink 28mm Bonds dial — pink dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("28mm", "Citizen", "Black"), buy: "https://buy.stripe.com/5kQ9ATfAL0qzg2rfBq7Zu3V" },
+        { name: "Ladies' Yellow 28mm",  img: "assets/asset-15.png",  alt: "Ladies' Yellow 28mm Bonds dial — yellow dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("28mm", "Citizen", "Black"), buy: "https://buy.stripe.com/8x25kD74fc9h5nNah67Zu3W" },
+        { name: "Ladies' White 28mm",   img: "assets/asset-16.png",   alt: "Ladies' White 28mm Bonds dial — white dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("28mm", "Citizen", "Black"), buy: "https://buy.stripe.com/4gM7sLgEPgpx9E3ah67Zu3X" },
+        { name: "Ladies' Black 28mm",   img: "assets/asset-17.png",   alt: "Ladies' Black 28mm Bonds dial — black dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("28mm", "Citizen", "Black"), buy: "https://buy.stripe.com/aFa5kDbkv5KTeYnbla7Zu3Y" },
+        { name: "Ladies' Red 28mm",     img: "assets/asset-18.png",     alt: "Ladies' Red 28mm Bonds dial — red dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("28mm", "Citizen", "Black"), buy: "https://buy.stripe.com/00w8wPagr8X58zZah67Zu3Z" },
+        { name: "Ladies' Emerald 28mm", img: "assets/asset-19.png", alt: "Ladies' Emerald 28mm Bonds dial — emerald green dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("28mm", "Citizen", "Black"), buy: "https://buy.stripe.com/28EcN5bkv1uD8zZ4WM7Zu40" },
+        { name: "Ladies' Blush 28mm",   img: "assets/asset-20.png",   alt: "Ladies' Blush 28mm Bonds dial — blush dial with gold numeral markers", contain: true, price: "$69.95", specs: ladiesSpecs("28mm", "Citizen", "Black"), buy: "https://buy.stripe.com/00wcN5cozehpaI774U7Zu41" }
+      ];
+
+      function renderWatch(w, specs, gridEl) {
+        var card = document.createElement("article");
+        card.className = "card";
+
+        var fig = document.createElement("button");
+        fig.type = "button";
+        fig.className = "card-fig" + (w.contain ? " contain" : "");
+        fig.setAttribute("aria-label", "View the " + w.name + " dial up close");
+        var img = document.createElement("img");
+        img.src = w.img;
+        img.alt = w.alt;
+        img.loading = "lazy";
+        fig.appendChild(img);
+        if (w.tag) {
+          var tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = w.tag;
+          fig.appendChild(tag);
+        }
+        var hint = document.createElement("span");
+        hint.className = "zoom-hint";
+        hint.textContent = "Tap to enlarge";
+        fig.appendChild(hint);
+        fig.addEventListener("click", function () { openLightbox(w); });
+        card.appendChild(fig);
+
+        var body = document.createElement("div");
+        body.className = "card-body";
+
+        var top = document.createElement("div");
+        top.className = "card-top";
+        var h3 = document.createElement("h3");
+        h3.textContent = w.name;
+        var price = document.createElement("span");
+        price.className = "price";
+        price.textContent = w.price || "$99.95";
+        top.appendChild(h3);
+        top.appendChild(price);
+        body.appendChild(top);
+
+        var ul = document.createElement("ul");
+        ul.className = "specs";
+        specs.forEach(function (s) {
+          var li = document.createElement("li");
+          var a = document.createElement("span"); a.textContent = s[0];
+          var b = document.createElement("span"); b.textContent = s[1];
+          li.appendChild(a); li.appendChild(b);
+          ul.appendChild(li);
+        });
+        body.appendChild(ul);
+
+        var buy = document.createElement("div");
+        buy.className = "buy";
+        var link = document.createElement("a");
+        link.href = w.buy;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = "Buy";
+        link.setAttribute("aria-label", "Buy the " + w.name + " watch for " + (w.price || "$99.95"));
+        buy.appendChild(link);
+        body.appendChild(buy);
+
+        card.appendChild(body);
+        gridEl.appendChild(card);
+      }
+
+      WATCHES.forEach(function (w) { renderWatch(w, SPECS, document.getElementById("grid")); });
+      LADIES.forEach(function (w) { renderWatch(w, w.specs, document.getElementById("ladiesGrid")); });
+
+      var lightbox = document.getElementById("lightbox");
+      var lbImg = document.getElementById("lbImg");
+      var lbName = document.getElementById("lbName");
+      var lbClose = document.getElementById("lbClose");
+      var lastFocus = null;
+
+      function openLightbox(w) {
+        lastFocus = document.activeElement;
+        lbImg.src = w.img;
+        lbImg.alt = w.alt;
+        lbName.innerHTML = "";
+        lbName.appendChild(document.createTextNode(w.name));
+        var p = document.createElement("span");
+        p.textContent = w.price || "$99.95";
+        lbName.appendChild(p);
+        lightbox.classList.add("open");
+        lbClose.focus();
+      }
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+        lbImg.removeAttribute("src");
+        if (lastFocus) lastFocus.focus();
+      }
+      lbClose.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", function (e) { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && lightbox.classList.contains("open")) closeLightbox();
+      });
+    </script>
+  </body>
+</html>
